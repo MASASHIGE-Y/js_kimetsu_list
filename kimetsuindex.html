@@ -1,0 +1,32 @@
+<!doctype html>
+<html lang="ja">
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>鬼滅キャラクター一覧</title>
+    <link rel="stylesheet" href="./kimetsustyle.css" />
+    <script src="main.js" defer></script>
+  </head>
+
+  <body>
+    <main class="container">
+      <h1>鬼滅キャラクター一覧</h1>
+
+      <section class="filters" aria-label="カテゴリフィルター">
+        <label><input type="radio" name="category" value="all" checked> 全キャラクター</label>
+        <label><input type="radio" name="category" value="kisatsutai"> 鬼殺隊</label>
+        <label><input type="radio" name="category" value="hashira"> 柱</label>
+        <label><input type="radio" name="category" value="oni"> 鬼</label>
+      </section>
+
+      <section id="loading" class="loading hidden">Loading...</section>
+      <section id="error" class="error hidden"></section>
+
+      <section id="grid" class="grid"></section>
+    </main>
+
+    <script src="main.js" defer></script>
+  </body>
+
+</html>
