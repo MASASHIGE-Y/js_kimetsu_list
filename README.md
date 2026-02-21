@@ -2,6 +2,7 @@
 
 鬼滅キャラクター一覧（Vanilla JS）
 
-## Demo
+## Deploy
 
-（後でGitHub PasesのURLをここに貼る）
+GitHub Pages:
+https://masashige-y.github.io/js_kimetsu_list/
