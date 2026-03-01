@@ -11,7 +11,6 @@ const radios = document.querySelectorAll('input[name="category"]');
 // API（課題指定） 将来、URLが変更されても1箇所の修正（BASE_URL）で済む
 const BASE_URL = "https://ihatov08.github.io";
 const API_BASE_URL = `${BASE_URL}/kimetsu_api/api`;
-const API_URL = `${API_BASE_URL}/all.json`;
 
 // 表示制御
 function showLoading() {
