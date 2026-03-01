@@ -8,9 +8,10 @@ const loadingEl = document.querySelector("#loading");
 const errorEl = document.querySelector("#error");
 const radios = document.querySelectorAll('input[name="category"]');
 
-// API（課題指定）
-const API_BASE = "https://ihatov08.github.io";
-const API_URL = "https://ihatov08.github.io/kimetsu_api/api/all.json";
+// API（課題指定） 将来、URLが変更されても1箇所の修正（BASE_URL）で済む
+const BASE_URL = "https://ihatov08.github.io";
+const API_BASE_URL = `${BASE_URL}/kimetsu_api/api`;
+const API_URL = `${API_BASE_URL}/all.json`;
 
 // 表示制御
 function showLoading() {
@@ -45,7 +46,7 @@ function renderCharacters(list) {
     card.className = "card";
 
     card.innerHTML = `
-    <img src="${API_BASE}${ch.image}" alt="${escapeHtml(ch.name)}">
+    <img src="${BASE_URL}${ch.image}" alt="${escapeHtml(ch.name)}">
     <div class = "name">${escapeHtml(ch.name)}</div>
     <div class = "category">${escapeHtml(ch.category)}</div>
     `;
@@ -66,15 +67,19 @@ async function fetchCharacters(categoryKey) {
   hideError();
 
   try {
-    const response = await fetch(API_URL, { signal: currentAbortController.signal });
-    if (!response.ok) throw new Error(`APIの取得に失敗しました(${response.status})`);
-    
+    const url = `${API_BASE_URL}/${categoryKey}.json`;
+
+    const response = await fetch(url, {
+      signal: currentAbortController.signal,
+    });
+
+    if(!response.ok) {
+      throw new Error(`APIの取得に失敗しました(${response.status})`);
+    }
+
     const data = await response.json();
+    renderCharacters(data);
 
-    const jpCategory = CATEGORY_MAP[categoryKey] ?? null;
-    const filtered = jpCategory ? data.filter((ch) => ch.category === jpCategory) : data;
-
-    renderCharacters(filtered);
   } catch (err) {
     // Abort はエラー表示しない
     if(err.name !== "AbortError") showError(err.message);
